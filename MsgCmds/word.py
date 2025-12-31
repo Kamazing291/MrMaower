@@ -23,8 +23,10 @@ async def word(ctx: commands.Context, word: str, *, hint: str | None = None):
                     return False
                 
                 return True
-    
-    await ctx.message.delete()
+    try:
+        await ctx.message.delete()
+    except Exception:
+        pass
 
     word = word.strip().lower()
     if not await isWord(word):
