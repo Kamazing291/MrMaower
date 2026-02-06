@@ -52,7 +52,7 @@ async def wordle(interaction: discord.Interaction):
         
         return " ".join(result)
     async def isWord(word: str):
-        if fullmatch(r"[a-z]+", guess) is None:
+        if fullmatch(r"[a-z]+", word) is None:
             return False
 
         url = f"{getenv("DICT")}{guess}"
@@ -104,7 +104,7 @@ async def wordle(interaction: discord.Interaction):
                 general = await bot.fetch_channel(int(getenv("GENERAL")))
 
                 if interaction.user.id == owner:
-                    await general.send(f"# Wordle of the Day\n<@&{int(getenv("WORDLE"))}> has lost it's {doc[streak]} day streak. Today's wordle was **{word}**, shame on you.")
+                    await general.send(f"# Wordle of the Day\n<@&{int(getenv("WORDLE"))}> has lost its {doc["streak"]} day streak. Today's wordle was **{word}**, shame on you.")
                 else:
                     await general.send(f"# Wordle of the Day\n<@&{int(getenv("WORDLE"))}> is on a **{streak}** day streak. Today's wordle (**{word}**) has been beaten by {interaction.user.mention}.")
 
