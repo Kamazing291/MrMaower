@@ -2,6 +2,7 @@ from importlib import import_module
 from os import listdir, getenv
 
 from variables import bot, guild
+from wake_ping import ping
 
 if __name__ == "__main__":
     for folder in ["MsgCmds", "SlshCmds"]:
@@ -14,5 +15,7 @@ if __name__ == "__main__":
 async def on_ready():
     await bot.tree.sync(guild=guild)
     print(f"{bot.user.display_name} has connected")
+
+ping()
 
 bot.run(getenv("TOKEN"))
