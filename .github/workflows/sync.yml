@@ -11,8 +11,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          lfs: true
+          lfs: true # This tells GitHub to pull your images correctly
+
+      - name: Install Git LFS
+        run: git lfs install
+
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://Kamazing:$HF_TOKEN@huggingface.co/spaces/Kamazing/MrMaower main
+        # We add 'git lfs push' before the main push
+        run: |
+          git lfs push --all https://Kamazing:$HF_TOKEN@huggingface.co/spaces/Kamazing/MrMaower
+          git push --force https://Kamazing:$HF_TOKEN@huggingface.co/spaces/Kamazing/MrMaower main
