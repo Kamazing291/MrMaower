@@ -16,17 +16,17 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          # 1. Wipe the history to remove the "binary file" block
+          # 1. Wipe history
           rm -rf .git
           
-          # 2. Re-initialize as a clean repo
-          git init
+          # 2. Re-initialize and FORCE the branch name to 'main'
+          git init -b main
           git config user.name "Kamazing291"
           git config user.email "Kamazing291@users.noreply.github.com"
           
-          # 3. Add all files (including the .gitattributes)
+          # 3. Add files
           git add .
           git commit -m "Fresh sync fix for binary files"
           
-          # 4. Force push to Hugging Face
+          # 4. Push to HF
           git push --force https://Kamazing:$HF_TOKEN@huggingface.co/spaces/Kamazing/MrMaower main
