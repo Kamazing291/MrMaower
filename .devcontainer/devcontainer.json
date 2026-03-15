@@ -1,0 +1,14 @@
+{
+  "name": "Python 3.14 Bot",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "customizations": {
+    "codesandbox": {
+      "tasks": {
+        "run": "python main.py"
+      }
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt"
+}
