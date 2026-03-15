@@ -1,15 +1,18 @@
-# Use a slim Python image
-FROM python:3.11-slim
+# Use the official Python 3.12 slim image
+FROM python:3.12-slim
 
-# Set working directory
+# Set the working directory
 WORKDIR /app
 
-# Install dependencies
+# Copy requirements and install
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all files (including your assets folder)
+# Copy all files
 COPY . .
+
+# Ensure logs show up instantly
+ENV PYTHONUNBUFFERED=1
 
 # Start the bot
 CMD ["python", "main.py"]
