@@ -2,7 +2,6 @@ from importlib import import_module
 from os import listdir, getenv
 
 from variables import bot, guild
-from wake_ping import ping
 
 if __name__ == "__main__":
     for folder in ["MsgCmds", "SlshCmds"]:
