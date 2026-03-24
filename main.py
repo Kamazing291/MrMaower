@@ -15,6 +15,4 @@ async def on_ready():
     await bot.tree.sync(guild=guild)
     print(f"{bot.user.display_name} has connected")
 
-ping()
-
 bot.run(getenv("TOKEN"))
