@@ -2,7 +2,7 @@ from os import getenv
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-from mistralai.client import Mistral
+from mistralai import Mistral
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 

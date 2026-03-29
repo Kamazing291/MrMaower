@@ -23,7 +23,7 @@ async def wordle(interaction: discord.Interaction):
     length = len(word)
     lives = 6
 
-    await interaction.response.send_message(f"Enter a {length} letter word (lives = {lives}): ")
+    await interaction.response.send_message(f"Enter a {length} letter word (lives = {lives}):")
     if doc["done"]:
         await interaction.followup.send(f"PS: {doc["win"]} has already gotten today's word")
 
