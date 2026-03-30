@@ -1,13 +1,17 @@
 import discord
 from aiohttp import ClientSession
+from os import getenv
 from variables import bot, guild
 
 @bot.tree.command(name="hangman", description="torment a man who is hanged", guild=guild)
 async def hm(interaction: discord.Interaction):
     word = ""
-    url = "https://random-word-api.herokuapp.com/word"
 
-    async with ClientSession() as session:
+    url = "https://api.api-ninjas.com/v2/randomword"
+
+    headers = { "X-API-Key": getenv("NINJA_KEY") }
+
+    async with ClientSession(headers=headers) as session:
         async with session.get(url) as r:
             data = await r.json()
             word = str(data[0])
@@ -41,7 +45,7 @@ async def hm(interaction: discord.Interaction):
         torso = ""
 
         if lives < 5:
-            torso = " |"
+            torso = "  |"
         
         if lives < 4:
             torso = "-" + torso.strip()
@@ -53,7 +57,7 @@ async def hm(interaction: discord.Interaction):
 
         # legs
         if lives < 2:
-            lines[4] += "/ "
+            lines[4] += "/"
         
         if lives < 1:
             lines[4] += "\\"

@@ -99,8 +99,11 @@ async def ttt(interaction: discord.Interaction, opponent: discord.Member):
 
         def evaluate():
             return [REVERSE[button.label] for button in grid]
-        def availability():
-            return [i for i, v in enumerate(evaluate()) if v == "none"]
+        def availability(board=None):
+            if board is None:
+                board = evaluate()
+
+            return [i for i, v in enumerate(board) if v == "none"]
         
         def check_win(board, symbol: str):
             for win in WIN:
@@ -109,7 +112,7 @@ async def ttt(interaction: discord.Interaction, opponent: discord.Member):
             return False
         
         def next_win(board, symbol: str):
-            for move in availability():
+            for move in availability(board):
                 board[move] = symbol
                 if check_win(board, symbol):
                     board[move] = "none"
@@ -117,10 +120,10 @@ async def ttt(interaction: discord.Interaction, opponent: discord.Member):
                 board[move] = "none"
             return None
         def fork(board, symbol):
-            for move in availability():
+            for move in availability(board):
                 board[move] = symbol
                 win_threats = 0
-                for next_move in availability():
+                for next_move in availability(board):
                     board[next_move] = symbol
                     if check_win(board, symbol):
                         win_threats += 1
