@@ -59,14 +59,14 @@ async def ttt(interaction: discord.Interaction, opponent: discord.Member):
             
             choice = int(interaction2.data["custom_id"][1]) - 1
 
-            if cp == p1:
+            if cp is p1:
                 if grid[choice].label != SYMBOLS["none"]:
                     await interaction2.response.send_message("Can't overwrite squares!", ephemeral=True)
                     return
                 grid[choice].label = SYMBOLS["x"]
                 grid[choice].disabled = True
                 cp = p2
-            elif cp == p2:
+            elif cp is p2:
                 if grid[choice].label != SYMBOLS["none"]:
                     await interaction2.response.send_message("Can't overwrite squares!", ephemeral=True)
                     return
