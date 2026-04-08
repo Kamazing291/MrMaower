@@ -12,6 +12,10 @@ async def connect(interaction: discord.Interaction, opponent: discord.Member):
         await interaction.response.send_message("Stop playing with yourself")
         return
     
+    if interaction.user.bot:
+        await interaction.response.send_message("Lmao ts loser doesn't have friends")
+        return
+    
     turn = randint(0, 1)
 
     SYMBOLS = {

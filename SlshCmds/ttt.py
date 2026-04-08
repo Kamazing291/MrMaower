@@ -53,7 +53,7 @@ async def ttt(interaction: discord.Interaction, opponent: discord.Member):
         async def callback(interaction2: discord.Interaction):
             nonlocal cp, grid
 
-            if interaction2.user != cp:
+            if interaction2.user is not cp:
                 await interaction2.response.send_message("This button is not for you!", ephemeral=True)
                 return
             
@@ -153,23 +153,23 @@ async def ttt(interaction: discord.Interaction, opponent: discord.Member):
             tgrid = evaluate()
 
             move = next_win(tgrid, b_symbol)
-            if move != None:
+            if move is not None:
                 return move
             
             move = next_win(tgrid, p_symbol)
-            if move != None:
+            if move is not None:
                 return move
             
             move = fork(tgrid, b_symbol)
-            if move != None:
+            if move is not None:
                 return move
             
             ofork = fork(tgrid, p_symbol)
-            if ofork != None:
+            if ofork is not None:
                 for move in availability():
                     cboard = evaluate()
                     cboard[move] = b_symbol
-                    if next_win(cboard, b_symbol) != None:
+                    if next_win(cboard, b_symbol) is not None:
                         return move
                 return ofork
             
@@ -177,15 +177,15 @@ async def ttt(interaction: discord.Interaction, opponent: discord.Member):
                 return 4
             
             move = opp_corner(tgrid)
-            if move != None:
+            if move is not None:
                 return move
             
             move = emp_corner(tgrid)
-            if move != None:
+            if move is not None:
                 return move
             
             move = emp_side(tgrid)
-            if move != None:
+            if move is not None:
                 return move
             
             return None
@@ -215,7 +215,7 @@ async def ttt(interaction: discord.Interaction, opponent: discord.Member):
                 return
             
             move = best_move()
-            if move == None:
+            if move is None:
                 await interaction2.response.edit_message(content="DRAW", view=view)
                 return
             
@@ -223,7 +223,7 @@ async def ttt(interaction: discord.Interaction, opponent: discord.Member):
             grid[move].disabled = True
 
             move = best_move()
-            if move == None:
+            if move is None:
                 await interaction2.response.edit_message(content="DRAW", view=view)
                 return
 
